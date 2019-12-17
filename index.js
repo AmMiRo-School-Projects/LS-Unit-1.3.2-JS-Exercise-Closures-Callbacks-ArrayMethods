@@ -199,7 +199,7 @@ function getFullNames(runners) {
  */
 function firstNamesAllCaps(runners) {
   return runners.map(function(runner) {
-    runner.first_name.touppercase();
+    return runner.first_name.toUpperCase();
   });
 }
 
