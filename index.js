@@ -156,14 +156,8 @@ function processContains(item, list, callback) {
  * should return 3.
  */
 function processDuplicateFree(list, callback) {
-  return callback(
-    for (let i = 0; i < list.length; i++){
-      for (let j = 0; j < list.length; j++) {
-        if (i != j && list[i] == list[j])
-        return true
-      }
-    }
-  )
+  const newList = list.filter((el, i) => list.indexOf(el) === i);
+  return callback(newList);
 }
 
 /////////////// HIGHER-ORDER ARRAY METHODS ///////////////
@@ -259,10 +253,9 @@ function tallyUpDonations(runners) {
  */
 function counterMaker() {
   // BROKEN CODE STARTS
-  let count = -1;
+  let count = 0;
   return function counter() {
-    ++count;
-    return count;
+    return count++;
   };
   // BROKEN CODE ENDS
 }
@@ -288,15 +281,12 @@ function counterMaker() {
  * etc
  */
 function counterMakerWithLimit(maxValue) {
-  let count = -1;
+  let count = 0;
   return function() {
-    if (count == maxValue) {
+    if (count > maxValue) {
       count = 0;
-      return count;
-    } else {
-      count = count + 1;
-      return count;
     }
+    return count++;
   };
 }
 
